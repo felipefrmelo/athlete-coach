@@ -1,0 +1,13 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "user"
+resolve_s3 = true
+s3_prefix = "user"
+region = "sa-east-1"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "CognitoUserPoolRegion=\"sa-east-1\" CognitoUserPoolId=\"sa-east-1_1iCbzCoU7\" CognitoAppClientId=\"18p5s6upkkchilf8140j12ihel\""
+image_repositories = []
+
+[default.global.parameters]
+region = "sa-east-1"

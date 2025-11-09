@@ -1,0 +1,58 @@
+  AWSTemplateFormatVersion: '2010-09-09'
+  Transform: AWS::Serverless-2016-10-31
+  Description: AWS Serverless Quarkus HTTP - user-1.0-SNAPSHOT
+  Parameters:
+    CognitoUserPoolRegion:
+      Type: String
+      Default: sa-east-1
+      Description: AWS region where the Cognito user pool lives
+    CognitoUserPoolId:
+      Type: String
+      Default: sa-east-1_1iCbzCoU7
+      Description: Cognito user pool ID
+    CognitoAppClientId:
+      Type: String
+      Default: 18p5s6upkkchilf8140j12ihel
+      Description: Cognito app client ID that issues the JWTs
+  Globals:
+    Api:
+      EndpointConfiguration: REGIONAL
+      BinaryMediaTypes:
+        - "*/*"
+    HttpApi:
+      Auth:
+        DefaultAuthorizer: CognitoAuthorizer
+        Authorizers:
+          CognitoAuthorizer:
+            IdentitySource: "$request.header.Authorization"
+            JwtConfiguration:
+              issuer: !Sub 'https://cognito-idp.${CognitoUserPoolRegion}.amazonaws.com/${CognitoUserPoolId}'
+              audience:
+                - !Ref CognitoAppClientId
+
+  Resources:
+    UserNative:
+      Type: AWS::Serverless::Function
+      Properties:
+        Handler: not.used.in.provided.runtimei
+        Runtime: provided.al2023
+        CodeUri: ../target/function.zip
+        MemorySize: 128
+        Policies: AWSLambdaBasicExecutionRole
+        Timeout: 15
+        Environment:
+          Variables:
+            DISABLE_SIGNAL_HANDLERS: true
+        Events:
+          HttpApiEvent:
+            Type: HttpApi
+            Properties:
+              Path: /user/{proxy+}
+              Method: ANY
+
+  Outputs:
+    UserNativeApi:
+      Description: URL for application
+      Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/'
+      Export:
+        Name: UserNativeApi
