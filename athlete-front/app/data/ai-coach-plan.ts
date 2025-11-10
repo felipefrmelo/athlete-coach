@@ -1,0 +1,63 @@
+export const weeklyPlan = [
+  {
+    day: "MON",
+    date: 27,
+    workout: "Tempo Run",
+    type: "Threshold",
+    status: "Completed",
+    icon: "directions_run",
+    details: [
+      { label: "Duration", value: "60min" },
+      { label: "Pace", value: "4:30/km" },
+      { label: "HR Zone", value: "3" },
+    ],
+  },
+  {
+    day: "TUE",
+    date: 28,
+    workout: "Interval Repeats",
+    type: "VO2 Max",
+    status: "Upcoming",
+    icon: "directions_run",
+    isToday: true,
+    details: [
+      { label: "Duration", value: "45min" },
+      { label: "Pace", value: "5:00/km" },
+      { label: "HR Zone", value: "4" },
+    ],
+  },
+  {
+    day: "WED",
+    date: 29,
+    workout: "Endurance Zone 2",
+    type: "Base Building",
+    status: "Upcoming",
+    icon: "directions_bike",
+    details: [
+      { label: "Duration", value: "90min" },
+      { label: "Power Zone", value: "2" },
+      { label: "Cadence", value: "90rpm" },
+    ],
+  },
+  {
+    day: "THU",
+    date: 30,
+    workout: "Rest Day",
+    type: "Recovery",
+    status: "Rest",
+    icon: "hotel",
+  },
+  {
+    day: "FRI",
+    date: 31,
+    workout: "Recovery Ride",
+    type: "Active Recovery",
+    status: "Upcoming",
+    icon: "directions_bike",
+    details: [
+      { label: "Duration", value: "30min" },
+      { label: "Power Zone", value: "1" },
+      { label: "Cadence", value: "85rpm" },
+    ],
+  },
+];
